@@ -24,7 +24,7 @@ module Iamport
       url = "#{IAMPORT_HOST}/users/getToken"
       body = {
         imp_key: config.api_key,
-        imp_secret: config.api_secret,
+        imp_secret: config.api_secret
       }
 
       result = HTTParty.post url, body: body
@@ -116,7 +116,12 @@ module Iamport
         send("pay_#{type}", uri)
       end
     end
-
+    
+    def create_subscribe_customer(customer_uid, payload = {})
+      warn "[DEPRECATION] `create_subscribe_customer` is deprecated.  Please use `create_customer` instead."
+      create_customer(customer_uid, payload)
+    end
+    
     def create_customer(customer_uid, payload = {})
       uri = "subscribe/customers/#{customer_uid}"
 
